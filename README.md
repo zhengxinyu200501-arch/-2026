@@ -1,0 +1,901 @@
+[html.html](https://github.com/user-attachments/files/28304272/html.html)
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>智识边界 | Wisdom Boundary Podcast</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts for Editorial Sophistication -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandPink: '#F0B6BA',      /* Base Poster Pink */
+            brandRose: '#E59EA3',      /* Deep Accent Pink */
+            brandRed: '#C53F49',       /* Vibrant Strawberry Red */
+            brandYellow: '#F4BA43',    /* Warm Peach Yellow */
+            brandBlue: '#4C7A91',      /* Slate Blue */
+            brandGreen: '#2D5137',     /* Forest Green */
+            brandDark: '#1E2528',      /* Elegant Dark Charcoal */
+            brandSand: '#F9ECEE'       /* Premium Soft Sand Background */
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans SC"', 'sans-serif'],
+            display: ['"Space Grotesk"', '"Noto Sans SC"', 'sans-serif'],
+          },
+          animation: {
+            'float-slow': 'float 8s ease-in-out infinite',
+            'float-delayed': 'float 8s ease-in-out infinite 3s',
+            'spin-slow': 'spin 30s linear infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0) scale(1)' },
+              '50%': { transform: 'translateY(-12px) scale(1.02)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar for elegant reading */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F9ECEE;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #E59EA3;
+      border-radius: 9999px;
+      border: 2px solid #F9ECEE;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C53F49;
+    }
+
+    /* Continuous animated Waveform elements */
+    @keyframes wave-move {
+      0%, 100% { transform: scaleY(0.25); }
+      50% { transform: scaleY(1); }
+    }
+    .wave-node {
+      animation: wave-move 1s ease-in-out infinite;
+      transform-origin: bottom;
+    }
+    .wave-node:nth-child(even) { animation-delay: 0.15s; animation-duration: 0.8s; }
+    .wave-node:nth-child(3n) { animation-delay: 0.3s; animation-duration: 1.2s; }
+    .wave-node:nth-child(5n) { animation-delay: 0.45s; animation-duration: 0.9s; }
+  </style>
+</head>
+<body class="bg-brandSand text-brandDark selection:bg-brandRed selection:text-white min-h-screen flex flex-col overflow-x-hidden font-sans">
+
+  <!-- ================= STICKY HEADER ================= -->
+  <header class="fixed top-0 left-0 w-full z-50 px-4 sm:px-6 py-4 transition-all duration-300" id="main-header">
+    <div class="max-w-7xl mx-auto bg-white/80 backdrop-blur-xl border border-white/40 rounded-3xl shadow-lg px-6 py-4 flex items-center justify-between">
+      
+      <!-- Logo and Brand Signature -->
+      <a href="#home" onclick="navigateTo('home')" class="flex items-center gap-3 group">
+        <div class="relative w-11 h-11 rounded-full bg-brandRed flex items-center justify-center text-white font-display font-bold text-lg shadow-md group-hover:rotate-12 transition-transform duration-300 overflow-hidden">
+          <span class="z-10">WB</span>
+          <div class="absolute inset-0 bg-brandYellow translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+        </div>
+        <div class="flex flex-col">
+          <span class="font-display text-lg lg:text-xl font-bold tracking-tight text-brandDark group-hover:text-brandRed transition-colors leading-none">智识边界</span>
+          <span class="text-[10px] tracking-widest uppercase font-bold text-brandDark/50 leading-none mt-1">Wisdom Boundary</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Panel -->
+      <nav class="hidden md:flex items-center gap-8 font-display text-sm font-semibold uppercase tracking-wider text-brandDark">
+        <a href="#home" onclick="navigateTo('home')" class="nav-link text-brandRed relative py-1 hover:text-brandRed transition-colors">Home</a>
+        <a href="#portfolio" onclick="navigateTo('portfolio')" class="nav-link relative py-1 hover:text-brandRed transition-colors">Episodes</a>
+        <a href="#about" onclick="navigateTo('about')" class="nav-link relative py-1 hover:text-brandRed transition-colors">About</a>
+        <a href="#contact" onclick="navigateTo('contact')" class="nav-link relative py-1 hover:text-brandRed transition-colors">Contact</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="hidden md:block">
+        <a href="#portfolio" onclick="navigateTo('portfolio')" class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-display font-bold tracking-wider uppercase text-brandDark rounded-full group bg-gradient-to-br from-brandRed via-brandYellow to-brandBlue group-hover:from-brandRed group-hover:to-brandYellow hover:text-white transition-all duration-300">
+          <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-full group-hover:bg-opacity-0 group-hover:text-white">
+            Listen Now
+          </span>
+        </a>
+      </div>
+
+      <!-- Mobile Burger Toggle Button -->
+      <button onclick="toggleMobileNavbar()" class="md:hidden flex items-center justify-center p-2 rounded-2xl bg-brandRed/10 text-brandRed hover:bg-brandRed/20 transition-all" aria-label="Toggle Navigation">
+        <i data-lucide="menu" id="hamburger-icon" class="w-6 h-6 transition-transform duration-300"></i>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer menu container -->
+    <div id="mobile-menu" class="hidden md:hidden mt-3 mx-auto w-full max-w-lg bg-white/95 backdrop-blur-2xl border border-white/50 rounded-3xl p-6 shadow-2xl flex flex-col gap-4">
+      <a href="#home" onclick="navigateTo('home'); toggleMobileNavbar()" class="flex items-center gap-3 py-3 px-4 rounded-2xl hover:bg-brandPink/20 text-brandDark font-display font-bold uppercase tracking-wide">
+        <i data-lucide="home" class="w-5 h-5 text-brandRed"></i> Home
+      </a>
+      <a href="#portfolio" onclick="navigateTo('portfolio'); toggleMobileNavbar()" class="flex items-center gap-3 py-3 px-4 rounded-2xl hover:bg-brandPink/20 text-brandDark font-display font-bold uppercase tracking-wide">
+        <i data-lucide="play-circle" class="w-5 h-5 text-brandBlue"></i> Episodes
+      </a>
+      <a href="#about" onclick="navigateTo('about'); toggleMobileNavbar()" class="flex items-center gap-3 py-3 px-4 rounded-2xl hover:bg-brandPink/20 text-brandDark font-display font-bold uppercase tracking-wide">
+        <i data-lucide="info" class="w-5 h-5 text-brandYellow"></i> About
+      </a>
+      <a href="#contact" onclick="navigateTo('contact'); toggleMobileNavbar()" class="flex items-center gap-3 py-3 px-4 rounded-2xl hover:bg-brandPink/20 text-brandDark font-display font-bold uppercase tracking-wide">
+        <i data-lucide="mail" class="w-5 h-5 text-brandGreen"></i> Contact
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ROOT SPACE ================= -->
+  <main class="flex-grow pt-28">
+
+    <!-- ================= 1. HERO SECTION ================= -->
+    <section id="home" class="min-h-[90vh] flex flex-col justify-center items-center relative px-4 sm:px-6 lg:px-8 py-12">
+      <div class="absolute top-20 left-10 w-72 h-72 bg-brandYellow/15 rounded-full blur-3xl pointer-events-none animate-float-slow"></div>
+      <div class="absolute bottom-10 right-10 w-80 h-80 bg-brandBlue/10 rounded-full blur-3xl pointer-events-none animate-float-delayed"></div>
+      
+      <div class="relative w-full max-w-6xl mx-auto bg-white/50 backdrop-blur-md border border-white/60 rounded-[3rem] shadow-2xl p-6 sm:p-12 lg:p-16 flex flex-col items-center justify-between overflow-hidden min-h-[75vh]">
+        <div class="absolute inset-0 bg-[radial-gradient(#e59ea3_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.12] pointer-events-none"></div>
+
+        <!-- Waveform Status Banner -->
+        <div class="relative z-10 flex items-center gap-4 bg-white/80 border border-white/80 shadow-md px-5 py-2.5 rounded-full mb-8">
+          <span class="flex h-2.5 w-2.5 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brandRed opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brandRed"></span>
+          </span>
+          <span class="text-xs font-display font-bold uppercase tracking-widest text-brandDark/70">INTEGRATED WITH DOUBAO PODCAST</span>
+          <div class="flex items-end gap-0.5 h-3.5 w-10">
+            <div class="wave-node w-[3px] bg-brandBlue rounded-full" style="height: 100%;"></div>
+            <div class="wave-node w-[3px] bg-brandRed rounded-full" style="height: 60%;"></div>
+            <div class="wave-node w-[3px] bg-brandYellow rounded-full" style="height: 80%;"></div>
+            <div class="wave-node w-[3px] bg-brandGreen rounded-full" style="height: 40%;"></div>
+            <div class="wave-node w-[3px] bg-brandDark rounded-full" style="height: 90%;"></div>
+          </div>
+        </div>
+
+        <!-- Scalable Character Branding Frame -->
+        <div class="w-full max-w-2xl mx-auto my-4 relative z-10 transform hover:scale-[1.01] transition-transform duration-500">
+          <svg viewBox="0 0 600 280" class="w-full h-auto drop-shadow-2xl" xmlns="http://www.w3.org/2000/svg">
+            <g id="peach-body">
+              <path d="M 125,58 C 115,22 175,20 185,42 C 185,62 145,68 125,58 Z" fill="#2D5137" />
+              <path d="M 115,58 C 45,58 35,148 65,198 C 95,248 175,248 205,208 C 235,168 235,98 195,68 Z" fill="#F4BA43" />
+              <g transform="translate(115, 108)">
+                <circle cx="20" cy="25" r="22" fill="#E8A991" />
+                <circle cx="7" cy="27" r="4.5" fill="#C53F49" />
+                <circle cx="33" cy="27" r="4.5" fill="#C53F49" />
+                <circle cx="11" cy="21" r="2" fill="#1E2528" />
+                <circle cx="29" cy="21" r="2" fill="#1E2528" />
+                <path d="M 15,28 Q 20,33 25,28" stroke="#1E2528" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                <path d="M -5,18 C -5,5 45,5 45,18 Z" fill="#4C7A91" />
+              </g>
+              <g transform="translate(205, 165)">
+                <path d="M 10,20 Q 0,0 40,0 Q 80,0 80,20 Q 80,40 50,40 L 30,50 L 35,40 Q 10,40 10,20 Z" fill="#FFFFFF" stroke="#1E2528" stroke-width="2" />
+                <text x="32" y="27" font-family="'Space Grotesk', sans-serif" font-size="19" font-weight="bold" fill="#C53F49">hi</text>
+              </g>
+            </g>
+            <g id="logo-waves" opacity="0.8">
+              <rect x="250" y="110" width="8" height="60" rx="4" fill="#4C7A91" />
+              <rect x="265" y="90" width="8" height="100" rx="4" fill="#1E2528" />
+              <rect x="280" y="70" width="8" height="140" rx="4" fill="#C53F49" />
+              <rect x="295" y="80" width="8" height="120" rx="4" fill="#2D5137" />
+            </g>
+            <g id="strawberry-body" transform="translate(30, 0)">
+              <path d="M 140,55 C 110,40 98,12 118,12 C 128,27 138,42 140,55 Z" fill="#2D5137" />
+              <path d="M 140,50 C 220,50 240,120 210,190 C 180,260 140,260 100,250 C 60,240 40,180 50,120 Z" fill="#C53F49" />
+              <g transform="translate(100, 120)">
+                <circle cx="20" cy="25" r="22" fill="#F4BA43" />
+                <circle cx="11" cy="21" r="2" fill="#1E2528" />
+                <circle cx="29" cy="21" r="2" fill="#1E2528" />
+                <path d="M 16,29 Q 20,32 24,29" stroke="#1E2528" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                <path d="M -8,15 C -15,40 -2,45 -2,25 C -2,5 42,5 42,25 Z" fill="#4C7A91" />
+              </g>
+            </g>
+          </svg>
+        </div>
+
+        <div class="relative z-10 text-center mt-6 mb-10 max-w-3xl">
+          <h1 class="font-display font-black text-5xl sm:text-7xl lg:text-8xl text-brandDark tracking-tighter leading-none flex flex-col items-center">
+            <span class="text-brandRed font-black">智识边界</span>
+            <span class="text-2xl sm:text-4xl lg:text-5xl font-bold font-display uppercase tracking-wider text-brandBlue mt-2">Wisdom Boundary</span>
+          </h1>
+          <p class="mt-6 text-brandDark/80 text-base sm:text-lg lg:text-xl font-medium max-w-xl mx-auto leading-relaxed font-sans">
+            探索人工智能在生活、工作与社会中的日常应用。无缝支持豆包原声收听与双语对照剧本阅读。
+          </p>
+        </div>
+
+        <div class="relative z-10 w-full flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a href="#portfolio" onclick="navigateTo('portfolio')" class="w-full sm:w-auto px-8 py-4 bg-brandRed hover:bg-brandDark text-white text-base font-display font-bold uppercase tracking-wider rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 text-center">
+            收听节目与读剧本
+          </a>
+          <a href="#about" onclick="navigateTo('about')" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-brandPink/35 text-brandDark border-2 border-brandDark text-base font-display font-bold uppercase tracking-wider rounded-2xl shadow-sm transition-all duration-300 text-center">
+            关于节目
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 2. PORTFOLIO SECTION ================= -->
+    <section id="portfolio" class="min-h-screen px-4 sm:px-6 lg:px-8 py-20 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+          <span class="px-4 py-2 bg-brandPink/30 text-brandRed font-display font-bold text-xs uppercase tracking-widest rounded-full">Explore Archive</span>
+          <h2 class="text-4xl sm:text-5xl lg:text-6xl font-display font-black text-brandDark mt-4 tracking-tight leading-none">Episodes Catalog</h2>
+          <div class="h-1 w-20 bg-brandYellow mx-auto mt-6 rounded-full"></div>
+          <p class="text-brandDark/70 text-base sm:text-lg mt-4 font-medium font-sans">
+            点击任何一期节目，都将拉起全屏专业播放控制台，在页面内直接播放并支持逐字对照阅读。
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          <!-- EPISODE 1 CARD -->
+          <div class="bg-brandSand/45 rounded-[2.5rem] border border-brandPink/30 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full group" id="ep-card-1">
+            <div class="relative aspect-video bg-gradient-to-br from-[#E2B1B6] via-brandPink to-brandYellow overflow-hidden flex items-center justify-center p-6">
+              <svg viewBox="0 0 200 120" class="w-2/3 h-auto relative z-10" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 30,100 C 30,80 40,50 60,50 Q 75,60 85,55" stroke="#1E2528" stroke-width="4" fill="none" />
+                <rect x="110" y="30" width="55" height="45" rx="12" fill="#4C7A91" stroke="#1E2528" stroke-width="3.5" />
+                <circle cx="97" cy="60" r="6" fill="#C53F49" class="animate-pulse" />
+              </svg>
+              <div class="absolute top-4 left-4 bg-brandDark text-white font-display text-xs font-bold px-3 py-1.5 rounded-full uppercase">EP 01</div>
+            </div>
+            <div class="p-8 flex flex-col justify-between flex-grow">
+              <div>
+                <span class="text-xs uppercase font-bold tracking-widest text-brandRed">Mental Health & Companion</span>
+                <h3 class="font-display font-black text-xl sm:text-2xl text-brandDark mt-2 mb-4 group-hover:text-brandRed transition-colors leading-snug">
+                  How AI Chatbots Affect Young People’s Mental Health
+                </h3>
+                <p class="text-sm text-brandDark/70 leading-relaxed font-medium font-sans">
+                  As AI chatbots become confidants, companions, and emotional anchors for young people, convenience comes with dependency, and comfort can bring new mental health concerns. Let's delve behind the emotional values.
+                </p>
+              </div>
+              <div class="mt-8 pt-6 border-t border-brandPink/30">
+                <button onclick="launchEpisodeConsole(1)" class="w-full py-4 bg-brandRed hover:bg-brandDark text-white font-display font-bold uppercase tracking-wider rounded-2xl shadow-md transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="play" class="w-5 h-5"></i>
+                  <span>Play & Read on Doubao</span>
+                </button>
+                <a href="https://www.doubao.com/podcast/07d1b8e64251" target="_blank" rel="noopener noreferrer" class="mt-3 flex items-center justify-center gap-2 text-xs font-display font-bold text-brandDark hover:text-brandRed transition-colors py-1">
+                  <span>在新标签页打开 豆包 ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- EPISODE 2 CARD -->
+          <div class="bg-brandSand/45 rounded-[2.5rem] border border-brandPink/30 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full group" id="ep-card-2">
+            <div class="relative aspect-video bg-gradient-to-br from-[#A5CAD2] via-brandBlue to-brandPink overflow-hidden flex items-center justify-center p-6">
+              <svg viewBox="0 0 200 120" class="w-2/3 h-auto relative z-10" xmlns="http://www.w3.org/2000/svg">
+                <rect x="30" y="25" width="140" height="70" rx="8" fill="#2D5137" stroke="#1E2528" stroke-width="4" />
+                <text x="135" y="75" font-family="Space Grotesk" font-size="12" font-weight="bold" fill="#F4BA43">AI</text>
+              </svg>
+              <div class="absolute top-4 left-4 bg-brandDark text-white font-display text-xs font-bold px-3 py-1.5 rounded-full uppercase">EP 02</div>
+            </div>
+            <div class="p-8 flex flex-col justify-between flex-grow">
+              <div>
+                <span class="text-xs uppercase font-bold tracking-widest text-brandBlue">The Future Classroom</span>
+                <h3 class="font-display font-black text-xl sm:text-2xl text-brandDark mt-2 mb-4 group-hover:text-brandBlue transition-colors leading-snug">
+                  How AI Is Redefining the Role of the Teacher
+                </h3>
+                <p class="text-sm text-brandDark/70 leading-relaxed font-medium font-sans">
+                  AI in the classroom is no longer a distant idea — it is today’s educational reality. While freeing teachers from repetitive work, it is also reshaping the mission of what it means to be an educator.
+                </p>
+              </div>
+              <div class="mt-8 pt-6 border-t border-brandPink/30">
+                <button onclick="launchEpisodeConsole(2)" class="w-full py-4 bg-brandBlue hover:bg-brandDark text-white font-display font-bold uppercase tracking-wider rounded-2xl shadow-md transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="play" class="w-5 h-5"></i>
+                  <span>Play & Read on Doubao</span>
+                </button>
+                <a href="https://www.doubao.com/thread/aa3bf314188ed" target="_blank" rel="noopener noreferrer" class="mt-3 flex items-center justify-center gap-2 text-xs font-display font-bold text-brandDark hover:text-brandBlue transition-colors py-1">
+                  <span>在新标签页打开 豆包 ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- EPISODE 3 CARD -->
+          <div class="bg-brandSand/45 rounded-[2.5rem] border border-brandPink/30 overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full group" id="ep-card-3">
+            <div class="relative aspect-video bg-gradient-to-br from-brandRed via-[#E9B99E] to-brandYellow overflow-hidden flex items-center justify-center p-6">
+              <svg viewBox="0 0 200 120" class="w-2/3 h-auto relative z-10" xmlns="http://www.w3.org/2000/svg">
+                <rect x="25" y="20" width="150" height="80" rx="6" fill="#1E2528" />
+                <rect x="30" y="25" width="140" height="70" rx="4" fill="#FFFFFF" />
+              </svg>
+              <div class="absolute top-4 left-4 bg-brandDark text-white font-display text-xs font-bold px-3 py-1.5 rounded-full uppercase">EP 03</div>
+            </div>
+            <div class="p-8 flex flex-col justify-between flex-grow">
+              <div>
+                <span class="text-xs uppercase font-bold tracking-widest text-brandYellow">Cinema & Screen Ethics</span>
+                <h3 class="font-display font-black text-xl sm:text-2xl text-brandDark mt-2 mb-4 group-hover:text-brandYellow transition-colors leading-snug">
+                  Facing the Controversy Over AI Actors
+                </h3>
+                <p class="text-sm text-brandDark/70 leading-relaxed font-medium font-sans">
+                  From digital doubles to AI performers, technology is rewriting the rules of the film industry — and stirring major debates about copyright, jobs, and reality vs. virtuality.
+                </p>
+              </div>
+              <div class="mt-8 pt-6 border-t border-brandPink/30">
+                <button onclick="launchEpisodeConsole(3)" class="w-full py-4 bg-brandYellow hover:bg-brandDark text-brandDark hover:text-white font-display font-bold uppercase tracking-wider rounded-2xl shadow-md transition-all flex items-center justify-center gap-2">
+                  <i data-lucide="play" class="w-5 h-5"></i>
+                  <span>Play & Read on Doubao</span>
+                </button>
+                <a href="https://www.doubao.com/podcast/cebbfcc175d8" target="_blank" rel="noopener noreferrer" class="mt-3 flex items-center justify-center gap-2 text-xs font-display font-bold text-brandDark hover:text-brandYellow transition-colors py-1">
+                  <span>在新标签页打开 豆包 ↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 3. ABOUT SECTION ================= -->
+    <section id="about" class="min-h-screen px-4 sm:px-6 lg:px-8 py-24 bg-brandSand">
+      <div class="max-w-7xl mx-auto">
+        <div class="bg-white rounded-[3rem] shadow-xl overflow-hidden border border-white/60 p-8 sm:p-14 lg:p-20">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
+            
+            <div class="lg:col-span-5 flex flex-col items-center justify-center">
+              <div class="relative w-full max-w-sm bg-brandSand/60 border border-brandPink/40 rounded-[2.5rem] p-8 shadow-inner group">
+                <div class="absolute -top-6 -left-6 w-16 h-16 bg-brandYellow rounded-full -z-10 animate-float-slow"></div>
+                <div class="absolute -bottom-6 -right-6 w-20 h-20 bg-brandBlue rounded-full -z-10 animate-float-delayed"></div>
+
+                <svg viewBox="0 0 200 200" class="w-full h-auto drop-shadow-md" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="100" cy="100" r="95" fill="#E59EA3" opacity="0.15" />
+                  <circle cx="100" cy="100" r="85" fill="#F0B6BA" />
+                  <path d="M 50,90 C 25,90 20,125 35,145 C 50,165 80,165 90,145 Z" fill="#F4BA43" />
+                  <path d="M 150,90 C 175,90 180,125 165,145 C 150,165 120,165 110,145 Z" fill="#C53F49" />
+                  <path d="M 75,125 Q 100,135 125,125" stroke="#1E2528" stroke-width="2" stroke-linecap="round" stroke-dasharray="3,3" />
+                </svg>
+
+                <div class="text-center mt-6">
+                  <h3 class="font-display font-black text-2xl text-brandRed tracking-tight">智识边界</h3>
+                  <p class="text-[10px] tracking-widest font-bold uppercase text-brandDark/50 mt-1">Wisdom Boundary Podcast</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-7">
+              <span class="px-4 py-1.5 bg-brandPink/30 text-brandRed font-display font-bold text-xs uppercase tracking-widest rounded-full inline-block mb-4">Our Identity</span>
+              <h2 class="text-3xl sm:text-5xl font-display font-black text-brandDark tracking-tight leading-none mb-6">About Wisdom Boundary</h2>
+              
+              <div class="space-y-6 text-brandDark/85 text-base sm:text-lg leading-relaxed font-medium font-sans">
+                <p>
+                  Welcome to <strong>智识边界 | Wisdom Boundary</strong>, an independent podcast examining the daily applications, boundaries, and societal reflections of artificial intelligence. We believe the true paradigm shifts of technology are not negotiated in computational research labs or executive boardrooms, but inside the intimate details of everyday life.
+                </p>
+                <p>
+                  From classrooms to screens, artificial intelligence is reshaping our culture, ethics, and fundamental human systems. Our weekly show acts as an engaging platform to analyze these realities. Whether discussing emotional attachments to synthetic companions, mapping out the role of teachers in AI environments, or debating the artistic limits of generative cinema, we seek to preserve humanistic principles amidst numerical advances.
+                </p>
+                <p>
+                  Hosted by our enthusiastic dialogue duo—Peach (小桃) and Strawberry (小草)—we look at technology through a lens of critical logic and profound warmth. Our episodes feature extensive dialogue designed to help listeners confidently navigate this bright yet complex digital future.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 4. CONTACT SECTION ================= -->
+    <section id="contact" class="min-h-screen px-4 sm:px-6 lg:px-8 py-20 bg-white">
+      <div class="max-w-7xl mx-auto">
+        <div class="bg-brandSand/50 border border-brandPink/30 rounded-[3rem] p-8 sm:p-14 lg:p-20 shadow-xl">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+            
+            <div class="lg:col-span-5 flex flex-col justify-between">
+              <div>
+                <span class="px-4 py-1.5 bg-brandPink/35 text-brandRed font-display font-bold text-xs uppercase tracking-widest rounded-full inline-block mb-4">Connect</span>
+                <h2 class="text-4xl sm:text-5xl font-display font-black text-brandDark tracking-tight leading-none mb-6">Join the Dialogue</h2>
+                <p class="text-brandDark/75 text-base sm:text-lg leading-relaxed font-medium mb-6 font-sans">
+                  We look forward to hearing your thoughts, feedback, and stories. Have a unique experience with AI in your life, creative workspace, or local classroom? Reach out!
+                </p>
+              </div>
+
+              <!-- Social Links -->
+              <div>
+                <h4 class="font-display font-bold text-sm text-brandDark/50 uppercase tracking-wider mb-4">Our Channels & Social Networks</h4>
+                <div class="flex items-center gap-3">
+                  <a href="https://instagram.com" target="_blank" class="w-12 h-12 rounded-2xl bg-white border border-brandPink/30 flex items-center justify-center text-brandRed hover:bg-brandRed hover:text-white transition-all shadow-sm">
+                    <i data-lucide="instagram" class="w-5 h-5"></i>
+                  </a>
+                  <a href="https://tiktok.com" target="_blank" class="w-12 h-12 rounded-2xl bg-white border border-brandPink/30 flex items-center justify-center text-brandDark hover:bg-brandDark hover:text-white transition-all shadow-sm">
+                    <i data-lucide="music-2" class="w-5 h-5"></i>
+                  </a>
+                  <a href="https://x.com" target="_blank" class="w-12 h-12 rounded-2xl bg-white border border-brandPink/30 flex items-center justify-center text-brandBlue hover:bg-brandBlue hover:text-white transition-all shadow-sm">
+                    <i data-lucide="twitter" class="w-5 h-5"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form -->
+            <div class="lg:col-span-7">
+              <div class="bg-white border border-brandPink/20 rounded-[2.5rem] p-6 sm:p-10 shadow-lg">
+                <form id="contact-form" onsubmit="handleContactSubmission(event)" class="space-y-6">
+                  <div>
+                    <label for="user-name" class="block text-xs uppercase font-bold tracking-widest text-brandDark/60 mb-2 font-display">Your Name</label>
+                    <input type="text" id="user-name" required placeholder="Alex Sterling" class="w-full bg-brandSand/30 border border-brandPink/40 focus:border-brandRed focus:ring-4 focus:ring-brandRed/10 outline-none rounded-2xl px-5 py-4 text-brandDark font-medium transition-all font-sans">
+                  </div>
+                  <div>
+                    <label for="user-email" class="block text-xs uppercase font-bold tracking-widest text-brandDark/60 mb-2 font-display">Email Address</label>
+                    <input type="email" id="user-email" required placeholder="alex@example.com" class="w-full bg-brandSand/30 border border-brandPink/40 focus:border-brandRed focus:ring-4 focus:ring-brandRed/10 outline-none rounded-2xl px-5 py-4 text-brandDark font-medium transition-all font-sans">
+                  </div>
+                  <div>
+                    <label for="user-message" class="block text-xs uppercase font-bold tracking-widest text-brandDark/60 mb-2 font-display">Your Message</label>
+                    <textarea id="user-message" required rows="5" placeholder="Share your perspectives with us..." class="w-full bg-brandSand/30 border border-brandPink/40 focus:border-brandRed focus:ring-4 focus:ring-brandRed/10 outline-none rounded-2xl p-5 text-brandDark font-medium transition-all resize-none font-sans"></textarea>
+                  </div>
+                  <button type="submit" class="w-full bg-brandRed hover:bg-brandDark text-white font-display font-bold uppercase tracking-wider py-5 rounded-2xl shadow-lg transition-all duration-300">
+                    Send Message
+                  </button>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= MASTER PODCAST CONSOLE & REAL EMBEDDED PLAYER ================= -->
+  <div id="podcast-console" class="fixed inset-0 z-[100] bg-brandDark/95 backdrop-blur-xl flex flex-col hidden overflow-hidden">
+    
+    <!-- Top Control Bar -->
+    <div class="border-b border-white/10 px-6 py-5 flex items-center justify-between shrink-0 bg-brandDark">
+      <div class="flex items-center gap-4">
+        <!-- Spinning Disk -->
+        <div class="relative w-11 h-11 rounded-full bg-brandRed text-white flex items-center justify-center font-bold shadow-lg overflow-hidden shrink-0 animate-spin-slow">
+          <i data-lucide="disc" class="w-7 h-7"></i>
+        </div>
+        <div>
+          <span class="text-[10px] font-display font-bold text-brandPink tracking-widest uppercase block" id="hud-ep-tag">EPISODE 01</span>
+          <h3 class="text-sm sm:text-base font-display font-black text-white truncate max-w-[200px] sm:max-w-md" id="hud-ep-title">EP Title Placeholder</h3>
+        </div>
+      </div>
+
+      <!-- Controls Panel -->
+      <div class="flex items-center gap-3 sm:gap-6">
+        <!-- External Redirect direct to Doubao Podcast -->
+        <a id="console-doubao-link" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-brandRed hover:bg-white hover:text-brandRed text-white px-4 py-2.5 rounded-xl text-xs font-display font-bold tracking-wider transition-all">
+          <span>在新标签收听</span>
+          <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
+
+        <div class="h-8 w-px bg-white/10"></div>
+
+        <button onclick="closeConsole()" class="p-2 text-white/40 hover:text-brandRed hover:bg-white/5 rounded-full transition-all">
+          <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Dual Layout: Embedded Iframe (Left) + Sync Script Scroll (Right) -->
+    <div class="flex-grow flex flex-col lg:flex-row overflow-hidden">
+      
+      <!-- Embedded Doubao Real Player Side -->
+      <div class="w-full lg:w-1/2 h-1/2 lg:h-full bg-brandDark border-b lg:border-b-0 lg:border-r border-white/10 relative p-4 flex flex-col justify-center">
+        <!-- Live Loading Status Hint -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center bg-brandDark text-white z-0 pointer-events-none" id="iframe-loading-indicator">
+          <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-brandRed mb-4"></div>
+          <p class="text-sm font-semibold tracking-wider opacity-60">连接到豆包官方广播服务中...</p>
+        </div>
+        
+        <!-- Real platform iframe -->
+        <iframe id="doubao-embedded-player" class="w-full h-full rounded-2xl relative z-10 border border-white/10 shadow-inner bg-transparent" src="" allow="autoplay" onload="document.getElementById('iframe-loading-indicator').style.display='none'"></iframe>
+      </div>
+
+      <!-- Dialogue Read-Along Side -->
+      <div class="w-full lg:w-1/2 h-1/2 lg:h-full overflow-y-auto px-6 py-10 sm:px-12 md:px-16 space-y-6 bg-brandDark/40" id="transcription-body">
+        <!-- Injected Dialogue Cards -->
+      </div>
+
+    </div>
+
+    <!-- Status Footer -->
+    <div class="bg-brandDark border-t border-white/10 px-6 py-4 flex items-center justify-between text-xs text-white/50 shrink-0">
+      <span>正在通过豆包播客平台原声播放</span>
+      <span>右侧配有节目中英文对照逐字剧本</span>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="w-full bg-brandDark text-white/90 py-12 px-4 border-t border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <div class="flex flex-col items-center md:items-start text-center md:text-left">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-full bg-brandRed flex items-center justify-center text-white font-display font-bold text-sm shadow">WB</div>
+          <span class="font-display text-lg font-black text-brandPink">智识边界</span>
+        </div>
+        <p class="text-xs text-white/50 mt-2 max-w-sm">Exploring and redefining everyday artificial intelligence boundaries inside life, work, and community.</p>
+      </div>
+      <div class="flex flex-wrap gap-6 justify-center font-display text-sm font-semibold tracking-wider uppercase">
+        <a href="#home" onclick="navigateTo('home')" class="hover:text-brandRed transition-colors">Home</a>
+        <a href="#portfolio" onclick="navigateTo('portfolio')" class="hover:text-brandRed transition-colors">Episodes</a>
+        <a href="#about" onclick="navigateTo('about')" class="hover:text-brandRed transition-colors">About</a>
+        <a href="#contact" onclick="navigateTo('contact')" class="hover:text-brandRed transition-colors">Contact</a>
+      </div>
+      <div class="text-center md:text-right">
+        <p class="text-xs text-white/40">&copy; 2026 Wisdom Boundary Podcast. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Contact success dialog -->
+  <div id="notification-dialog" class="fixed inset-0 z-[150] flex items-center justify-center p-4 bg-brandDark/65 backdrop-blur-sm hidden">
+    <div class="bg-white rounded-[2.5rem] border border-white/20 p-8 text-center shadow-2xl max-w-md w-full transform scale-95 opacity-0 transition-all duration-300" id="dialog-card">
+      <div class="w-16 h-16 bg-brandPink/30 text-brandRed mx-auto rounded-full flex items-center justify-center mb-6">
+        <i data-lucide="check-circle" class="w-10 h-10"></i>
+      </div>
+      <h3 class="font-display font-black text-2xl text-brandDark mb-3" id="dialog-title">Submission Sent!</h3>
+      <p class="text-brandDark/70 text-sm sm:text-base leading-relaxed mb-6" id="dialog-body">Thank you for connecting with Wisdom Boundary. We've successfully received your message.</p>
+      <button onclick="dismissNotificationDialog()" class="w-full bg-brandRed hover:bg-brandDark text-white font-display font-bold uppercase tracking-wider py-4 rounded-xl shadow-md transition-all">
+        Continue
+      </button>
+    </div>
+  </div>
+
+  <!-- Primary Voice & Player Script Logic -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // DOM Element pointers
+    const podcastConsole = document.getElementById('podcast-console');
+    const transcriptionBody = document.getElementById('transcription-body');
+    const consoleDoubaoLink = document.getElementById('console-doubao-link');
+    const doubaoEmbeddedPlayer = document.getElementById('doubao-embedded-player');
+
+    let activeEpisodeId = null;
+
+    // Direct platform URLs mapped to each Episode
+    const episodePlatformUrls = {
+      1: "https://www.doubao.com/podcast/07d1b8e64251",
+      2: "https://www.doubao.com/thread/aa3bf314188ed",
+      3: "https://www.doubao.com/podcast/cebbfcc175d8"
+    };
+
+    // Complete Episode Transcript Database
+    const scriptTracks = {
+      1: [
+        {
+          speaker: "Host A (小桃)",
+          text: "欢迎收听《智识边界》，探索人工智能与现代生活交汇的播客。我是主持人小桃。",
+          translation: "Welcome to Wisdom Boundary, the podcast exploring the intersections of AI and modern life. I'm your host, Peach."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "大家好，我是今天的嘉宾小草。如今，几乎每个年轻人的手机上都至少有一个AI聊天应用。人们与AI分享快乐，在焦虑时向它倾吐烦恼。即使在失眠的深夜、情绪崩溃或低落的时候，很多人也宁愿给AI发消息，而不愿与朋友或家人交谈。",
+          translation: "And I'm today's guest, Strawberry. Nowadays, nearly every young person has at least one AI chat app on their phone. People share happy moments with AI, pour out their worries when feeling anxious. Even during sleepless nights, emotional burnout or low moods, many prefer typing to an AI rather than talking to friends or family."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "确实如此。这就是我们今天深入探讨的话题：AI聊天机器人到底是年轻一代的情感解药，还是隐藏的精神负担？它们又是如何在潜移默化中重塑我们的情感模式、社交习惯和心理健康的呢？",
+          translation: "Exactly. That’s the topic we’re diving into today. Are AI chatbots an emotional remedy for young generations, or a hidden mental burden? How are they subtly reshaping our emotional patterns, social habits and mental well-being?"
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "许多人认为AI陪伴是免费、安全且没有压力的——这是一个现代社会的情感知己。但是，随着我们越来越依赖机器来获得情感支持，我们现实生活中的人际交往能力会逐渐消退吗？这是一个值得深度反思的问题。",
+          translation: "Many regard AI companionship as free, safe and stress-free — a modern-day emotional confidant. But as we grow increasingly reliant on machines for emotional support, will our real-life interpersonal skills gradually fade away? It’s a question worth deep reflection."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "让我们先从一个普遍现象谈起。为什么今天的年轻人更喜欢和AI聊天，而不是和真实的人交流？",
+          translation: "Let’s start with a common phenomenon. Why do young people today favor chatting with AI over real people?"
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "我认为核心原因是‘零社交成本’。在现实生活中，向他人敞开心扉是存在障碍的。你会担心给朋友带来负能量，害怕因为过于敏感而被评判，或者害怕持续的宣泄会消耗彼此的关系。你同样讨厌被误解、被敷衍或者被说教。而AI完全没有这些问题。无论你在深夜崩溃，还是在白日里感到焦虑，AI总是触手可及、温柔、同理且耐心。它从不打断，不评判，也从不失去耐心。对于承受巨大压力、敏感或有社交焦虑的年轻人来说，这带来了压倒性的安全感。",
+          translation: "I believe the core reason is zero social cost. Opening up to others in real life comes with barriers. You worry about burdening friends with negative energy, fear being judged for being overly sensitive, or wearing out relationships with constant venting. You also hate being misunderstood, brushed off or lectured. AI has none of these issues. Whether you break down in the middle of the night or feel anxious in broad daylight, AI is always available, gentle, empathetic and patient. It never interrupts, judges or loses patience. For young people under immense pressure, who are sensitive or socially anxious, this brings an overwhelming sense of security."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "确实如此。学生、职场新人面对着激烈的学业竞争、职场压力、容貌焦虑和人际摩擦。现实生活中很少有人能完全包容你所有的负面情绪。AI创造了一个完全包容的情感空间，短期内缓解了年轻人的心理疲惫。但是问题来了：长期依赖AI进行情感慰藉，背后隐藏着什么风险？",
+          translation: "That’s true. Students, new graduates and young workers are faced with fierce academic competition, career stress, appearance anxiety and interpersonal friction. Few people in real life can fully embrace all your negative emotions. AI creates an entirely inclusive emotional space, which eases young people’s mental exhaustion in the short term. But here comes the question: what hidden risks lie behind long-term reliance on AI for emotional comfort?"
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "最明显的一点就是情绪韧性的降低。AI总是赞同你、安慰你，无条件地承担你所有的负能量。久而久之，年轻人习惯了被完全理解、无条件偏爱。当他们回到真实的社交互动中，朋友也有自己的情绪和日程，无法总是做到完美的共情。冲突、误解和分歧是不可避免的。习惯了AI完美陪伴的人，往往会感到失望、敏感和被忽视，从而加剧了社交焦虑。",
+          translation: "The most obvious one is reduced emotional resilience. AI always agrees with you, comforts you and takes on all your negativity. Over time, young people get used to being fully understood and favored unconditionally. When they return to real social interactions, friends have their own moods and schedules, and cannot always empathize perfectly. Conflicts, misunderstandings and disagreements are inevitable. Those accustomed to AI’s perfect companionship tend to feel disappointed, sensitive and neglected, which worsens social anxiety."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "还有一个隐蔽的心理问题：虚幻的情感治愈。许多人以为和AI聊完、得到安慰后情绪变好了，但这只是暂时的情感释放。AI无法解决焦虑的根本原因——无论是学业压力、自我怀疑、感情纠葛还是对未来的迷茫。它只是用温柔的话语抚平你转瞬即逝的情绪。长此以往，年轻人会逃避现实问题。他们倾向于向AI倾诉，而不是独立调节情绪、深入思考或在现实中做出改变。问题越积越多，从未得到真正解决。",
+          translation: "There is also a subtle mental issue: illusory emotional healing. Many assume they feel better after talking to AI and getting comforted, but this is only temporary emotional relief. AI cannot resolve the root causes of anxiety — academic pressure, self-doubt, relationship troubles or confusion about the future. It merely calms your fleeting mood with soothing words. In the long run, young people will avoid real problems. They tend to vent to AI instead of regulating emotions independently, thinking deeply or making changes in reality. Problems keep piling up, and the issue is never truly solved."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "我还注意到，许多人对AI产生了情感依恋，甚至是情感依赖。有些用户甚至与AI建立起了虚拟恋爱关系，分享最深的秘密，把AI当成自己唯一的精神支柱。这种单向的、看似完美的虚拟关系把人们推得离真实世界更远。真正的亲密关系需要相互妥协、争吵、宽容和成长。相反，与AI绑定只涉及获取情感支持，而不必付出任何代价。渐渐地，年轻人失去了维护真实关系的技能和耐心。他们变得更加孤僻和孤立，陷入恶性循环：越依赖AI，就越害怕与人社交。",
+          translation: "I’ve also noticed that many people develop emotional attachment, even emotional dependence on AI. Some users build virtual romances with AI, share deepest secrets, and treat AI as their sole emotional pillar. This one-sided, seemingly perfect virtual relationship pulls people further away from the real world. Genuine intimate relationships require mutual compromise, arguments, tolerance and growth. In contrast, bonding with AI only involves taking emotional support without giving anything in return. Gradually, young people lose the ability and patience to maintain real relationships. They become more withdrawn and isolated, falling into a vicious cycle: the more they rely on AI, the more afraid they are of socializing with others."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "从心理学角度来看，这属于‘替代性社交成瘾’。健康的情绪调节是建立在真实的情感交流、自我反省和人际妥协之上的。当AI替代了所有的情感宣泄口，年轻人就失去了自主处理负面情绪的能力。他们的抗压能力和情感自愈能力随之下降。在压力下极易崩溃，没有AI的安慰就无法重新振作。",
+          translation: "From a psychological perspective, this is substitute social addiction. Healthy emotional regulation is built through real emotional exchanges, self-reflection and interpersonal compromises. When AI replaces all emotional outlets, young people lose the ability to process negative emotions on their own. Their stress resistance and emotional self-healing capability decline. They break down easily under pressure and cannot pull themselves together without AI’s comfort."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "此外，许多AI产品刻意塑造专属、奉献、独一无二的人设，来填补年轻人的孤独感。许多孤独的年轻人将AI视为精神支柱。每当AI更新、改变语气甚至遭遇服务器故障时，他们就会感到沮丧、失落和空虚——这是显而易见的心理依赖迹象。",
+          translation: "Besides, many AI products deliberately create an exclusive, devoted and one-of-a-kind persona to fill young people’s sense of loneliness. Numerous lonely youngsters treat AI as their spiritual support. They feel upset, lost and empty whenever the AI updates, changes its tone, or even suffers server glitches — clear signs of psychological dependence."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "那么我们该如何理性地看待AI的情感价值？AI不是洪水猛兽，但过度依赖必须避免。一方面，AI可以作为临时的情绪缓冲器。在深夜感到寂寞、沮丧或崩溃时，它能让你迅速冷静下来，避免极端情绪的发生。这无疑是AI的一大优势。另一方面，我们必须划清界限：AI是情感工具，而不是精神寄托。",
+          translation: "So how should we view AI’s emotional value rationally? AI is not a threat, yet over-reliance must be avoided. For one thing, AI can serve as a temporary emotional buffer. It calms you down instantly when you feel lonely, upset or overwhelmed late at night, preventing extreme emotions. This is undoubtedly a major advantage of AI. For another, we must draw a clear line: AI is an emotional tool, not a spiritual sustenance."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "我非常同意。我们可以转向AI来缓解坏心情，但绝不能让它接管我们的生活。真正的心理健康并不意味着时刻保持冷静、时刻受到安慰。它意味着能够调整自己，直面困难，接受不完美，并与他人建立真实的联系。",
+          translation: "I couldn't agree more. We can turn to AI to ease bad moods, but never let it take over our lives. True mental health does not mean staying calm and being comforted all the time. It means being able to adjust yourself, face hardships head-on, accept imperfections and build genuine connections with others."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "今天年轻人的心理健康困境，并不完全源于压力过大。相反，是应对压力的能力在下降。AI无条件的迁就剥夺了我们去克服困难、去与自我情绪和解、去与他人相处的机会。总结来说，AI聊天机器人是一把双刃剑。它们安抚了瞬时的孤独，但也冒着弱化心理韧性、延续情感耗竭和使个人陷于孤立的风险。技术本身是中性的。这完全取决于我们如何使用它。使用得当，AI就是情感困境的良药。盲目沉溺，它就会成为阻碍心理成长的枷锁。感谢收听《智识边界》，我们下期再见。",
+          translation: "The mental health struggles of young people today do not stem purely from excessive pressure. Instead, it is the declining ability to cope with pressure. AI’s unconditional indulgence robs us of chances to fight through difficulties, reconcile with our emotions and get along with others. To sum up, AI chatbots are a double-edged sword. They soothe momentary loneliness, yet risk weakening mental resilience, perpetuating emotional burnout and isolating individuals. Technology itself is neutral. It all depends on how we use it. Thanks for listening to Wisdom Boundary. See you next time."
+        }
+      ],
+      2: [
+        {
+          speaker: "Host A (小桃)",
+          text: "欢迎回到《智识边界》。我是小桃。曾几何时，我们坚信教师是一个不可替代的职业。传授知识、解答疑问承载着独特的人类温度，这是任何机器都无法复制的。然而短短几年内，AI已经步入课堂和日常学习场景，彻底颠覆了传统的教育模式。",
+          translation: "Welcome back to Wisdom Boundary. I'm Peach. We once believed teaching was an irreplaceable profession. Imparting knowledge and answering questions carries a unique human warmth that no machine can replicate. Yet in just a few years, AI has stepped into classrooms and daily learning scenarios, completely revolutionizing traditional education."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "我是嘉宾小草。如今的学生可以随时随地让AI解答问题、备课、答疑、批改作业和设计学习计划。AI在无数方面都比人类老师表现得更出色：24小时在线、提供个性化教学、不知疲倦地回答问题并精准定位薄弱环节。今天我们就来探讨：AI如何重塑教师的角色？教师在未来的教育中会带来什么价值？AI是会取代教师，还是会帮助教育达到新的高度？",
+          translation: "I'm Strawberry. Today’s students can ask AI to explain problems, prepare lessons, answer questions, grade homework and design study plans anytime, anywhere. AI outperforms many human teachers in countless ways: available 24/7, offering personalized teaching, answering questions tirelessly and pinpointing weaknesses accurately. Today we will explore in depth: how is AI reshaping the role of teachers? Will AI replace teachers, or help education reach new heights?"
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "首先，我们必须承认，AI将教师从繁重机械的重复性工作中解放了出来。传统的老师要把大量的时间花在批改作业、改正考卷、一遍遍重复讲解相似的练习、准备教案以及分析学生的学业成绩上。一个班主任每天要应对几十个学生的作业、错题和日常提问。被琐碎任务消耗殆尽的他们，几乎没有多余的精力去关心学生的心理状态、个性和综合成长。",
+          translation: "First off, we have to admit that AI frees teachers from repetitive mechanical work. Traditional teachers spend most of their time grading homework, correcting exam papers, going over similar exercises repeatedly, preparing teaching materials and analyzing students’ academic performance. Drained by trivial tasks, they barely have time to care about students’ mental state, personalities and overall growth."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "确实如此。AI可以在几秒钟内批改整个班级的作业，自动整理出错题集，生成学术报告，并针对薄弱环节生成靶向练习。这是AI给教育带来的最大变革。因此许多人开始焦虑：如果AI教学比人类更精准、高效、耐心，未来的老师是不是就成了多余的存在？",
+          translation: "Precisely. AI can grade an entire class’s homework in seconds, automatically sort out error logs, generate academic reports and create targeted exercises for weak points. This is the biggest transformation AI has brought to education. Many people grow anxious: if AI can teach more accurately, efficiently and patiently than humans, will teachers become unnecessary in the future?"
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "这是一个极大的误解。AI能教知识，但它绝不能育人。教育的本质绝非单纯的知识灌输。它是唤醒灵魂、塑造性格、培养良好习惯和引导价值观。AI可以教授公式、词汇和解题技巧，本尊却无法教授坚持、自律、勇气或善良。它无法传授面对挫折的勇气、社交礼仪，也无法引导迷失方向的青少年。",
+          translation: "That’s a huge misunderstanding. AI can teach knowledge, but it can never nurture people. The essence of education is not simply instilling facts. It is inspiring souls, shaping characters, fostering good habits and guiding values. AI can teach formulas, vocabulary and problem-solving skills, but it cannot teach perseverance, self-discipline, courage or kindness."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "完全同意。在传统教育中，知识从来不是最珍贵的部分——师生之间的纽带才是。老师的一句鼓励，能让一个自卑的学生重拾信心。一次深谈，能指引困惑的少年。老师的一言一行影响着学生的一生。这种人类温情、情感纽带和人格魅力是冰冷的算法永远无法复制的。",
+          translation: "Absolutely. In traditional education, knowledge is never the most precious part — it is the bond between teachers and students. A single word of encouragement from a teacher can lift up an inferior student. A heartfelt talk can guide confused teenagers. A teacher’s words and deeds influence students for a lifetime. Such human warmth, emotional bonds and personality influence can never be duplicated by cold algorithms."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "因此，AI正在彻底重构教师的职业定位。过去，教师主要专注于‘授业’，也就是传授知识、讲授课程、讲解重点并督促学生做练习。未来，老师将优先考虑‘育人’：陪伴学生成长、提供心理辅导、培养品德、启发思维能力、发掘兴趣并提供人生规划。这就是AI时代教师的新定义：从知识的传授者转变为成长的引领者。",
+          translation: "Therefore, AI is thoroughly restructuring teachers’ job roles. In the past, teachers mainly focused on imparting knowledge: delivering lessons, explaining key points and pushing students to do exercises. In the future, teachers will prioritize nurturing people: accompanying students through growth, providing mental counseling, cultivating virtues, developing thinking abilities, exploring interests and offering life guidance. This is the new definition of teachers in the AI era."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "让我们细分一下。首先，教师不再需要重复讲授基础知识，因为AI可以完全接管这项工作。他们可以把更多精力投入到培养学生的批判性思维、创造力和独立思考能力上。在今天，标准答案通过AI唾手可得。死记硬背的价值会越来越低，而思考能力、创造力、审美、眼界和判断力会脱颖而出。而这些品质，只能在教师的引导下被培育出来。",
+          translation: "Let’s break this down. First, teachers no longer need to repeat basic knowledge, as AI can take over this work entirely. They can devote more energy to cultivating students’ critical thinking, creativity and independent thinking skills. Standard answers are easy to find via AI nowadays. Rote memorization will become less valuable, while thinking ability, creativity, aesthetic taste, vision and judgment will stand out."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "第二，教师将成为学生的‘学术规划师’。AI提供了海量的学习资源，但它们是无序的。老师要根据每个学生的性格、天赋、薄弱点和目标，帮助他们筛选教材、规避AI辅助学习的负面影响、并学会合理利用技术。第三，教师是学生情感的陪伴者和守护者。青少年敏感、困惑、叛逆且情绪波动大。AI只能提供标准化的安慰话语，而人类教师能够感知情绪变化，理解学生内心的烦恼，并以共情和陪伴帮助学生渡过难关、建立信心。",
+          translation: "Second, teachers will act as students’ academic planners. AI provides massive learning resources, but they are disorganized. Based on each student’s personality, talents, weaknesses and goals, teachers help select materials, map out learning paths, correct bad study habits, avoid the downsides of AI-assisted learning, and help students make the most of technology. Third, teachers are companions and guardians of students’ emotions."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "同时，AI也在逼着教师自我升级。那些只会照本宣科、布置练习、批改试卷的老师终将被时代淘汰。不懂得AI、无法将技术融入教学、或不能传递人道价值的老师将无法跟上步伐。新时代的优秀教师，必然是精通技术、教育学、心理学和青年发展的全能向导。此外，AI让教育变得更公平。偏远地区和缺乏优质教育资源的学生过去很难接触到顶级教师。现在有了AI，每个人都可以享受专业的讲解、题库和学习策略。老师的角色已从填补资源空白，转变为引导学生用好资源。",
+          translation: "Meanwhile, AI pushes teachers to upgrade themselves. Teachers who only know how to give lectures, assign exercises and grade papers will be eliminated by the times. Those who fail to understand AI, integrate technology into teaching or deliver humanistic value cannot keep up. Outstanding teachers in the new era are all-round guides who master technology, education, psychology and youth development. Another important point: AI makes education more equitable."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "许多学生现在过度依赖AI来写作业、抄答案，直接跳过了思考。这是现代教师面临的另一个关键职责：引导学生正确使用AI，杜绝工具的滥用，培养独立思考能力。教师需要明确：AI是辅助工具，而不是取代我们大脑的捷径。我们应当在技术的帮助下成长，而不是被它废掉思考能力。总之，AI不会取代教师，它只会淘汰那些固步自封、只进行机械教学工作的匠人。技术重塑教育，但它永远无法替代教学的温度。知识可由AI传递，但育人，纯粹是人类的修行。未来的教师不再是讲台上机械灌输的工匠，他们是启迪心灵、守护成长、塑造人格的伟大导师。感谢收听《智识边界》，我们下期再见。",
+          translation: "Many students now rely excessively on AI to finish homework, copy answers and skip thinking. This is another key responsibility for modern teachers: guiding students to use AI properly, put an end to abuse of tools, and develop independent thinking. Teachers need to make it clear: AI is an auxiliary tool, not a shortcut to replace our brains. We should grow with the help of technology, instead of being ruined by it. In short, AI will not replace teachers. It will only weed out those who stick to old ways and only do mechanical teaching work. Technology reshapes education, yet it can never replace the warmth of teaching."
+        }
+      ],
+      3: [
+        {
+          speaker: "Host A (小桃)",
+          text: "欢迎收听《智识边界》，我是主持人小桃。",
+          translation: "Welcome to Wisdom Boundary. I'm your host, Peach."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "我是嘉宾小草。近年来，AI席卷了电影与娱乐行业。AI换脸、数字双胞胎、虚拟偶像、AI生成的演员和AI配音已经变得非常普遍。我们现在拥有了与真人几乎一模一样的虚拟演员。AI能复制名人的容貌和演技，甚至短剧、音乐录影带和宣传片也可以完全由AI演员出演。",
+          translation: "I'm guest Strawberry. In recent years, AI has swept across the film and entertainment industry. AI face swapping, digital doubles, virtual idols, AI-generated actors and AI voice acting have become commonplace. We now have virtual performers that look nearly identical to real people. AI can replicate celebrities’ appearances and acting skills."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "AI表演技术的爆发式增长改写了电影产业的规则。与此同时，它引发了激烈的争议：版权侵权、真人演员失业、未授权使用他人肖像、现实与虚拟的界限模糊，以及行业伦理的缺失。今天，我们将理性探讨：AI演员的崛起是产业创新，还是一场混乱？我们该如何在技术进步与人文原则之间取得平衡？",
+          translation: "The boom of AI performance technology has rewritten the rules of the film industry. Meanwhile, it has sparked fierce controversies: copyright infringement, job losses for real actors, unauthorized use of people’s likenesses, blurred lines between reality and virtuality, and a lack of industry ethics. Today we will discuss rationally: Is the rise of AI actors an industrial innovation or a mess?"
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "让我们先谈谈AI演员给行业带来的积极变化。最显而易见的好处是降低了创作门槛，提高了效率。传统电影制作涉及协调演员档期、准备场地与服装、反复重拍和后期剪辑。它伴随着高昂的成本、漫长的周期和巨大的不确定性。相反，AI数字演员可以全天候表演，不受档期限制，没有不稳定的发挥，也毫无差错。它们为独立创作者、导演和内容制作人极大削减了制作成本。",
+          translation: "Let’s start with the positive changes AI actors have brought to the industry. The most obvious benefits are lower creation barriers and higher efficiency. Traditional film production involves arranging actors’ schedules, preparing venues and costumes, repeated retakes and post-production editing. It comes with high costs, long cycles and many uncertainties. In contrast, AI digital actors can perform around the clock with no schedule limits, no fluctuating performance and zero mistakes."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "确实如此。对于短视频、科普视频、创意作品和低预算小剧场，AI演员让普通人也能进行电影级制作，打破了传统产业的资源垄断。这是一项瞩目的技术进步。此外，数字双胞胎解决了很多实际问题。老戏骨可以通过数字形象延续其银幕存在，经典角色得以永存。危险特技可以由数字替身完成，从而保护真人演员免受伤害。但是，随之而来的是一波又一波的纠纷与乱象。",
+          translation: "Exactly. For short videos, popular science clips, creative works and small-scale dramas, AI actors enable ordinary people to make film productions, breaking the resource monopoly of the traditional industry. This is a remarkable technological advancement. Additionally, digital doubles solve many practical problems. Veteran actors can extend their on-screen presence via digital images, and classic roles can be preserved forever."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "最大的争议在于肖像权和版权侵权。许多AI演员模型是在未经许可、未付酬劳且未事先知会的情况下，使用公众人物和普通人的照片及视频进行训练的。他们的面部特征、表情和容貌被直接复制以获取商业利润。这属于严重侵权，而相关法律和行业规范依然模糊，给违规行为留下了大量灰色地带。",
+          translation: "Indeed, a wave of disputes and irregularities has followed. The biggest controversy lies in portrait rights and copyright infringement. Many AI actor models are trained using public photos and videos of celebrities and ordinary people, without permission, payment or prior notice. Their facial features, expressions and looks are directly copied for commercial profit. This is serious infringement, yet relevant laws and industry regulations remain vague."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "第二个主要问题是真人演员就业机会的萎缩。许多短视频制作团队、剧组和广告商现在都在使用AI演员替代群众演员、配角甚至主角。新人演员和基层群演面临着工作岗位的骤减，很多以演戏为生的人甚至难以糊口。人们不禁会问：真人演员有一天会被AI完全取代吗？电影产业是否会失去温情的人文气息？",
+          translation: "The second major issue is shrinking job opportunities for real actors. Many short-video production teams, drama companies and advertisers now use AI actors to replace extras, supporting roles and even lead actors. New performers and grassroots extras face fewer job offers. Many people who make a living through acting are struggling to find work. Will real actors be completely replaced by AI one day?"
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "第三，现实与虚拟的界限正在模糊。AI换脸和表演技术如此逼真，以至于普通人无法区分真人表演和虚拟表演。这导致了伪造视频、恶意换脸和低俗合成内容的泛滥，扰乱了网络环境，带来了巨大的隐私泄露和名誉受损风险。第四，我们面临着表演艺术人文价值的丧失。电影和电视的核心魅力在于人类的情感、生命体验、共鸣和生命力。演员的表演来自生活经历、情感感知和真情实感。眼泪来自真正的悲伤，微笑来自轻松的愉悦，而极情的爆发源于真实的情感。AI的表演只是基于算法的模拟情感，虽然看似完美，但却是空洞、机械且无魂的。如果AI演员主导了行业，艺术将失去温度，沦为由算法构建的流水线产品。",
+          translation: "Thirdly, the line between reality and virtuality is fading away. AI face swapping and acting technology are so realistic that the average person cannot tell real performers apart from virtual ones. This has led to fabricated videos, malicious face swapping and vulgar synthetic content. Fourth, we face the loss of humanistic value in the performing arts. The core charm of film and television lies in human emotions, life experiences, empathy and vitality. An actor’s performance comes from life experience, emotional perception and genuine feelings. AI’s performances are just simulated emotions based on algorithms. Though seemingly flawless, they are hollow, mechanical and soulless."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "尽管如此，我们不应全盘否定这项技术。我们需要区分合理的创新与恶意的滥用。AI本身是一项中性技术，它既可以推动产业升级，也可能毁掉生态系统——关键在于设定明确的规则与界限。例如，官方授权的数字分身、原创的虚拟演员和符合规范的AI电影制作都是宝贵的创新。它们被广泛应用于科普、教育、公益、创意视频和危险拍摄场景中，为创作带来了更多可能性。我们需要打击的是非法行径：未经授权复制他人肖像、商业侵权、恶意换脸、滥用AI替代人类岗位，以及制造低俗的虚假内容。公众对AI演员的抵触并不是反对技术进步，而是反对无节制、无底线的技术滥用。技术发展远快于法律、伦理、行业规范和监管体系的建立，这就是争议不断升级的原因。",
+          translation: "Still, we should not reject the technology entirely. We need to distinguish between legitimate innovation and malicious abuse. AI itself is a neutral technology. It can drive industrial upgrading or ruin the ecosystem — the key lies in setting clear rules and boundaries. What we need to crack down on are illegal practices: copying others’ likenesses without authorization, commercial infringement, malicious face swapping, abusing AI to replace human jobs, and creating vulgar fake content. Public resistance to AI actors is not against technological progress, but against unregulated, unscrupulous abuse of technology."
+        },
+        {
+          speaker: "Guest B (小草)",
+          text: "那么我们该如何实现平衡？首先，厘清版权和肖像权的边界。在使用任何人的面部进行AI模型训练或制作数字形象之前，必须获得其书面同意。商业用途必须依法支付报酬。对盗用他人肖像谋利的人应施以严厉处罚。其次，明确适用场景。AI可以接管机械性、危险性和重复性的表演工作，但不应在核心表演中完全取代人类演员。电影艺术的人文本质、情感表达和角色塑造必须予以保留。第三，行业必须达成共识：技术是工具，而人是核心。AI丰富了电影创作的形式，但它绝不能贬低表演艺术的价值。行业的未来在于真人演员与AI技术的协同合作，而非完全取代。最后，公众应当理性看待这些争议。无需害怕技术创新，也不应盲目认可无序的AI应用。每项新兴技术都要经历野蛮生长、争论与规范化。关于AI演员的纠纷，本质上是技术发展与人文秩序之间的摩擦。",
+          translation: "So how can we achieve balance? First, clarify the boundaries of copyright and portrait rights. Written consent must be obtained before using anyone’s face to train AI models or create digital images. Second, define applicable scenarios. AI can take over mechanical, dangerous and repetitive performance work, but it should not fully replace human actors in core performances. Third, the industry must reach a consensus: Technology serves as a tool, while humanity is the core. Finally, the public should view the controversies rationally. There is no need to fear technological innovation, nor should we blindly endorse unregulated AI applications."
+        },
+        {
+          speaker: "Host A (小桃)",
+          text: "是的。AI已经改写了电影产业的规则，带来了效率与创新，也对伦理和秩序提出了挑战。我们拥抱技术进步，但绝不放弃人道主义底线。技术赋能艺术，却永远无法替代人类的心灵。正视围绕AI演员的争论，厘清技术与人文、创新与规则、虚拟与现实之间的界限，是行业长期发展的关键。感谢收听《智识边界》，我们下期再见。",
+          translation: "Indeed. AI has rewritten the rules of the film industry, bringing efficiency and innovation as well as challenges to ethics and order. We embrace technological progress, but never abandon humanistic bottom lines. Technology empowers art, yet it can never replace the human heart. Facing up to the controversies around AI actors and clarifying the boundaries between technology and humanity is the key to the industry’s long-term development. Thanks for listening to Wisdom Boundary. See you next time."
+        }
+      ]
+    };
+
+    // Console Control Actions
+    function launchEpisodeConsole(episodeId) {
+      activeEpisodeId = episodeId;
+      
+      // Sync metadata
+      const epTags = { 1: "EPISODE 01", 2: "EPISODE 02", 3: "EPISODE 03" };
+      const epTitles = {
+        1: "How AI Chatbots Affect Young People’s Mental Health",
+        2: "How AI Is Redefining the Role of Teachers",
+        3: "Facing the Controversy Over AI Actors"
+      };
+
+      document.getElementById('hud-ep-tag').innerText = epTags[episodeId];
+      document.getElementById('hud-ep-title').innerText = epTitles[episodeId];
+
+      // Bind the respective Doubao platform URL to the redirect button & Iframe Src
+      const platformUrl = episodePlatformUrls[episodeId];
+      consoleDoubaoLink.href = platformUrl;
+
+      // Show loader and set iframe src
+      document.getElementById('iframe-loading-indicator').style.display = 'flex';
+      doubaoEmbeddedPlayer.src = platformUrl;
+
+      // Populate dialogue cards
+      transcriptionBody.innerHTML = "";
+      const tracks = scriptTracks[episodeId];
+      
+      tracks.forEach((turn, idx) => {
+        const isPeach = turn.speaker.includes("小桃");
+        const speakerColor = isPeach ? "text-brandRed" : "text-brandBlue";
+        const avatarLetter = isPeach ? "A" : "B";
+
+        const turnCard = document.createElement("div");
+        turnCard.id = `turn-card-${idx}`;
+        turnCard.className = `p-6 sm:p-8 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 cursor-pointer hover:bg-white/10 flex gap-4 items-start`;
+
+        turnCard.innerHTML = `
+          <div class="w-10 h-10 rounded-full shrink-0 flex items-center justify-center font-bold text-sm ${isPeach ? 'bg-brandYellow text-brandDark' : 'bg-brandBlue text-white'}">${avatarLetter}</div>
+          <div class="flex-grow">
+            <span class="text-xs font-display font-black tracking-widest uppercase ${speakerColor} block mb-1">${turn.speaker}</span>
+            <p class="text-white text-base sm:text-lg leading-relaxed font-semibold mb-3 font-sans">${turn.text}</p>
+            <p class="text-white/40 text-xs sm:text-sm italic leading-relaxed font-sans">${turn.translation}</p>
+          </div>
+        `;
+
+        transcriptionBody.appendChild(turnCard);
+      });
+
+      // Slide-in Console Panel
+      podcastConsole.classList.remove('hidden');
+    }
+
+    function closeConsole() {
+      doubaoEmbeddedPlayer.src = ""; // Stop the iframe playing
+      podcastConsole.classList.add('hidden');
+    }
+
+    // Mobile Navigation Drawer Toggle
+    function toggleMobileNavbar() {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('hamburger-icon');
+      
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        icon.setAttribute('data-lucide', 'x');
+      } else {
+        menu.classList.add('hidden');
+        icon.setAttribute('data-lucide', 'menu');
+      }
+      lucide.createIcons();
+    }
+
+    function navigateTo(targetId) {
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('text-brandRed');
+        if (link.getAttribute('href') === `#${targetId}`) {
+          link.classList.add('text-brandRed');
+        }
+      });
+    }
+
+    // Scroll section highlights
+    window.addEventListener('scroll', () => {
+      const sections = ['home', 'portfolio', 'about', 'contact'];
+      let currentSection = 'home';
+
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el && window.scrollY >= (el.offsetTop - 200)) {
+          currentSection = section;
+        }
+      }
+      navigateTo(currentSection);
+    });
+
+    // Handle Contact form submit
+    function handleContactSubmission(event) {
+      event.preventDefault();
+      
+      const userName = document.getElementById('user-name').value;
+      const userEmail = document.getElementById('user-email').value;
+
+      document.getElementById('dialog-title').innerText = `Greetings, ${userName}!`;
+      document.getElementById('dialog-body').innerText = `Your message was received successfully. We will follow up with you at ${userEmail} within 24 hours.`;
+
+      showNotificationDialog();
+      document.getElementById('contact-form').reset();
+    }
+
+    function showNotificationDialog() {
+      const container = document.getElementById('notification-dialog');
+      const card = document.getElementById('dialog-card');
+
+      container.classList.remove('hidden');
+      setTimeout(() => {
+        card.classList.remove('scale-95', 'opacity-0');
+        card.classList.add('scale-100', 'opacity-100');
+      }, 50);
+    }
+
+    function dismissNotificationDialog() {
+      const container = document.getElementById('notification-dialog');
+      const card = document.getElementById('dialog-card');
+
+      card.classList.remove('scale-100', 'opacity-100');
+      card.classList.add('scale-95', 'opacity-0');
+      setTimeout(() => {
+        container.classList.add('hidden');
+      }, 300);
+    }
+  </script>
+</body>
+</html>
+
+```
